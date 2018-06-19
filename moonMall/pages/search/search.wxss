@@ -1,5 +1,6 @@
 /* pages/search/search.wxss */
 @import "../../templates/wxSearch/wxSearch.wxss";
+
 .page {
   min-height: 100%;
 }

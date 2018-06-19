@@ -203,7 +203,9 @@ function wxSearchAddHisKey(that) {
 }
 function wxSearchDeleteKey(e, that) {
   var text = e.target.dataset.key;
+  console.log("'text",text);
   var value = wx.getStorageSync('wxSearchHisKeys');
+  console.log("value",value);
   value.splice(value.indexOf(text), 1);
   wx.setStorage({
     key: "wxSearchHisKeys",

@@ -55,7 +55,6 @@
 var app=getApp();
 var config=require("../../utils/config.js");
 var util=require("../../utils/util.js");
-var starscore = require("../../templates/starscore/starscore.js");
 Page({
   /**
    * 页面的初始数据
@@ -171,7 +170,7 @@ Page({
   },
   toDetailsTap: function (e) {
     wx.navigateTo({
-      url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
+      url: "/pages/goods-detail/goodsdetail?id=" + e.currentTarget.dataset.id
     })
   },
   tapBanner: function (e) {

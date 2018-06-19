@@ -1,8 +1,17 @@
-<template name="starscore" >
+ <template name="starscore" >
   <view class="xing">
     <block wx:for="{{item.xingpic}}" wx:key="{{item.id}}" wx:for-item="pingfen">
       <image class="img" src="{{pingfen}}"></image>
     </block>
     <text data-pingfen="{{item.pingfen}}" >{{item.pingfen}}</text>
   </view>
-</template>
+</template> 
+<!-- <template name="starscore" >
+  <view class="xing">
+         <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
+          <image class="img" src="{{star}}" style="width:20rpx;height:20rpx;"></image>
+        </block>
+        <text style='padding-left:10rpx;' wx:if="{{item.starscore}}" data-pingfen="{{item.starscore}}">{{item.starscore}}分</text>
+        <text style='padding-left:10rpx;' wx:else data-pingfen="{{item.starscore}}">0分</text>
+  </view>
+</template> -->

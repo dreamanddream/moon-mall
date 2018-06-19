@@ -19,12 +19,13 @@
       <wxc-label wx:else  class="goodsSoldNumber">已售{{item.numberOrders}}份</wxc-label>
       <!--这里的评分和引入组件与否无关，是直接传递的数据，使用score的js  -->
       <wxc-label class="goodsScore" type='fill' type-color='none' text-color='#666666'>评分：
-         <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
+      <!-- <template is="starscore" data="{{item}}"></template>  -->
+          <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
           <image class="img" src="{{star}}" style="width:20rpx;height:20rpx;"></image>
         </block> 
-        <!-- <template is="starscore" data="{{item.star}}"></template> -->
+         
         <text style='padding-left:10rpx;' wx:if="{{item.starscore}}" data-pingfen="{{item.starscore}}">{{item.starscore}}分</text>
-        <text style='padding-left:10rpx;' wx:else data-pingfen="{{item.starscore}}">0分</text>
+        <text style='padding-left:10rpx;' wx:else data-pingfen="{{item.starscore}}">0分</text> 
       </wxc-label>
     </view>
   </view>

@@ -1,8 +1,11 @@
 // pages/search/search.js
+var starscore = require("../../templates/starscore/starscore.js");
 var WxSearch = require('../../templates/wxSearch/wxSearch.js');
 var app = getApp()
 Page({
   data: {
+    page: 1,
+    pageSize: 10000,
     keyword: '',
     loadingHidden: false, // loading
     userInfo: {},
@@ -51,7 +54,32 @@ Page({
     //初始化的时候渲染wxSearchdata 第二个为你的search高度
     WxSearch.init(that, 43, app.globalData.hotGoods);
     WxSearch.initMindKeys(app.globalData.goodsName);  //获取全部商品名称，做为智能联想输入库
+
+    that.getCouponsTitlePicStr();
     that.getCoupons();
+  },
+  getCouponsTitlePicStr: function () {
+    var that = this;
+    //  获取商城名称
+    wx.request({
+      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
+      data: {
+        key: 'couponsTitlePicStr'
+      },
+      success: function (res) {
+        if (res.data.code == 0) {
+          that.setData({
+            couponsTitlePicStr: res.data.data.value
+          })
+          console.log('couponsTitlePicStr------------------')
+          console.log(res.data.data.value)
+          console.log('ok')
+        }
+      },
+      fail: function () {
+        console.log('fail')
+      },
+    })
   },
   //事件处理函数
   toDetailsTap: function (e) {

@@ -3,7 +3,6 @@
 <import src="../../templates/wxSearch/wxSearch.wxml" />
 
 <view class="container" style='background: -webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.7));'>
-
   <view class="search-view" style="background:-webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.7)); ">
     <view class="serarch-content">
       <view class='search-icon-view'>
@@ -56,6 +55,9 @@
 
     <view style='width: 100%;height: 10rpx;'></view>
   </wxc-flex>
+
+  <!--拼团开团-->
+
 </view>
 
 <view class='more-things'>
