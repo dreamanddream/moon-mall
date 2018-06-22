@@ -101,6 +101,7 @@ Page(Object.assign({},{
     //对canvasClock函数循环调用  
     this.interval = setInterval(this.canvasClock, 1000)
   },
+  // 点击左侧导航对应的显示右侧内容
   tapClassify: function (e) {
     var that = this;
     var id = e.target.dataset.id;
@@ -112,7 +113,10 @@ Page(Object.assign({},{
       that.setData({
         classifyViewed: id,
       });
+      // 点击侧边导航栏可以得到当前分类的id
       console.log('id:', that.data.classifyViewed)
+      console.log("数据",that.data);
+      // 然后循环遍历这侧边导航，找到和id一样的侧边，然后拿到当前id下面对应的goodsList商品列表
       for (var i = 0; i < that.data.categories.length; i++) {
         if (id === that.data.categories[i].id) {
           that.setData({
@@ -134,12 +138,13 @@ Page(Object.assign({},{
     }*/
 
   },
-  //事件处理函数
+  //跳转到详情页
   toDetailsTap: function (e) {
     wx.navigateTo({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })
   },
+  // 页面加在完成后获取整个项目商品信息
   reLoad: function () {
     var that = this
     that.setData({
@@ -152,6 +157,7 @@ Page(Object.assign({},{
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/category/all',
       success: function (res) {
+        console.log("页面初始化时获取的数据",+res.data);
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
           for (var i = 0; i < res.data.data.length; i++) {
@@ -200,15 +206,11 @@ Page(Object.assign({},{
           });
           return;
         }
-
         for (var i = 0; i < res.data.data.length; i++) {
           goods.push(res.data.data[i]);
         }
-
-
-        console.log('getGoods----------------------')
+        console.log('这是获取所有商品列表');
         console.log(goods)
-
         var page = that.data.page;
         var pageSize = that.data.pageSize;
         for (let i = 0; i < goods.length; i++) {
@@ -273,7 +275,6 @@ Page(Object.assign({},{
                 break;
               }
             }
-
             console.log('左侧导航列表')
             console.log(that.data.goodsList)
             that.setData({
@@ -315,6 +316,7 @@ Page(Object.assign({},{
       }
     })
   },
+  // 店铺顶部欢迎光临！"¥28起送 | 同城免费送 | 由于业务有限仅送县城范围"文字提示内容
   getDelivery: function () {
     var that = this
     //  获取关于我们Title
@@ -332,6 +334,7 @@ Page(Object.assign({},{
       }
     })
   },
+  // canvas钟表
   canvasClock: function () {
     var context = wx.createCanvasContext(this.canvasId, this)//创建并返回绘图上下文（获取画笔）  
     //设置宽高  

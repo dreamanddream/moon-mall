@@ -20,16 +20,16 @@
   <wxc-dialog class="onLoad-err" title="提示" content="加载商品数据失败！" confirm-text="重试" cancel-text="返回" bindconfirm="onConfirm" bindcancel="onCancel"></wxc-dialog>
 
   <view class="content-container">
-
+    <!--动态loading  -->
     <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
     <wxc-toast is-show="{{loadingFinish}}" icon="yes" icon-color="#FF0077" text="所有商品加载完成"> </wxc-toast>
-
+    <!--左侧导航  -->
     <scroll-view class="classify-container" scroll-y="true" scroll-with-animation="true">
       <view class="classify {{classifyViewed==classify.id?'active':''}}" wx:for="{{categories}}" wx:for-item="classify" wx:key="id" data-id="{{classify.id}}" bindtap="tapClassify">
         <view class="name {{classifyViewed==classify.id?'active':''}}">{{classify.name}}</view>
       </view>
     </scroll-view>
-
+    <!--右侧内容  -->
     <scroll-view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
       <view data="{{goodsListCurrent}}">
         <view class="title">
@@ -53,6 +53,7 @@
               <wxc-label class="sold" wx:if="{{item.numberOrders == 0}}" type='fill'>新品上市</wxc-label>
               <wxc-label class="sold" wx:if="{{item.numberOrders != 0}}">已售{{item.numberOrders}}份</wxc-label>
               <wxc-label class='star' style='position:absolute;left:380rpx;' type='fill' type-color='none' text-color='#666666'>
+              <!--评分  -->
                 <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
                   <image class="img" src="{{star}}" style="width:20rpx;height:20rpx;"></image>
                 </block>
@@ -61,7 +62,7 @@
               </wxc-label>
             </view>
           </view>
-
+            <!--异常流 ，当商品长度为0时，显示异常流，同时也证明了在wxml中可以直接使用goods.length方法进行判断长度 -->
           <wxc-abnor type="SHOP" wx:if='{{goodsListCurrent.goods.length === 0}}' title='还没有添加' tip='稍后再来试试吧~' bind:abnortap="reLoad"></wxc-abnor>
           <wxc-loadmore is-end="{{true}}" icon="{{true}}" style="position: relative; bottom: 0rpx;"></wxc-loadmore>
 
