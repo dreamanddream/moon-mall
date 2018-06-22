@@ -70,6 +70,8 @@ App({
     bgRed: 0,
     bgGreen: 175,
     bgBlue: 180,
+    version: "2.0.6",
+    userInfo: null,
     shareProfile: '一流的服务，做超新鲜的水果'
   },
   /**

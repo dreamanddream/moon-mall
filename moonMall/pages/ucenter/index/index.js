@@ -129,10 +129,11 @@ Page({
     })
 
   },
+  // 获取用户积分：
   getUserAmount: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/amount',
+      url: 'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/user/amount',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -196,14 +197,16 @@ Page({
       }
     })
   },
+  // 今日是否签到，如果今日未签到，点击后显示今日已签到
   checkScoreSign: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/today-signed',
+      url: 'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/score/today-signed',
       data: {
         token: wx.getStorageSync('token')
       },
       success: function (res) {
+        console.log("今日是否签到接口的作用",res.data);
         if (res.data.code == 0) {
           that.setData({
             score_sign_continuous: res.data.data.continuous
@@ -212,14 +215,17 @@ Page({
       }
     })
   },
+  // 点击签到
   scoresign: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/sign',
+      // url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/sign',
+      url:'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/score/sign',
       data: {
         token: wx.getStorageSync('token')
       },
       success: function (res) {
+        console.log("签到地址",res.data);
         if (res.data.code == 0) {
           that.getUserAmount();
           that.checkScoreSign();

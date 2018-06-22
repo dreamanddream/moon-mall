@@ -142,14 +142,17 @@ Page({
       }
     })
   },
+  // 显示优惠券信息，也就是检索优惠券信息
   getCoupons: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/coupons',
+      // url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/coupons',
+      url:'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/discounts/coupons',
       data: {
         type: ''
       },
       success: function (res) {
+        console.log("检索优惠券信息",res.data);
         if (res.data.code == 0) {
           that.setData({
             hasNoCoupons: false,
@@ -186,19 +189,23 @@ Page({
       }
     })
   },
+  // 点击领取优惠券，并根据优惠券使用权限，进行不同的提示
   gitCoupon: function (e) {
     var that = this;
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/fetch',
+      // 需要将每一个优惠券对应的id和用户登录得token传递给后台
       data: {
         id: e.currentTarget.dataset.id,
         token: wx.getStorageSync('token')
       },
       success: function (res) {
+        console.log("点击领取优惠券时返回的数据",res.data);
         if (res.data.code == 20001 || res.data.code == 20002) {
           that.setData({
             getCoupStatus: 0
           })
+          // 结合minui中wxc的消息提示内容
           setTimeout(() => {
             that.setData({
               getCoupStatus: -1

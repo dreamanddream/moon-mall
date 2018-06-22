@@ -36,31 +36,31 @@ Page(Object.assign({},{
   },
   onLoad: function (options) {
     var that = this
-    
-    wx.setNavigationBarTitle({
-      title: wx.getStorageSync('mallName')
-    })
-    that.setData({
-      categories: app.globalData.categories,
-      goods: app.globalData.goods,
-      goodsList: app.globalData.goodsList,
-      onLoadStatus: app.globalData.onLoadStatus,
-      activeCategoryId: app.globalData.activeCategoryId,
-      background_color: app.globalData.globalBGColor,
-      bgRed: app.globalData.bgRed,
-      bgGreen: app.globalData.bgGreen,
-      bgBlue: app.globalData.bgBlue
-    })
-    for (var i = 0; i < that.data.categories.length; i++) {
-      if (that.data.activeCategoryId === that.data.categories[i].id) {
-        that.setData({
-          classifyViewed: that.data.categories[i].id,
-          scrolltop: 0,
-          goodsListCurrent: that.data.goodsList[i],
+    that.reLoad();
+    // wx.setNavigationBarTitle({
+    //   title: wx.getStorageSync('mallName')
+    // })
+    // that.setData({
+    //   categories: app.globalData.categories,
+    //   goods: app.globalData.goods,
+    //   goodsList: app.globalData.goodsList,
+    //   onLoadStatus: app.globalData.onLoadStatus,
+    //   activeCategoryId: app.globalData.activeCategoryId,
+    //   background_color: app.globalData.globalBGColor,
+    //   bgRed: app.globalData.bgRed,
+    //   bgGreen: app.globalData.bgGreen,
+    //   bgBlue: app.globalData.bgBlue
+    // })
+    // for (var i = 0; i < that.data.categories.length; i++) {
+    //   if (that.data.activeCategoryId === that.data.categories[i].id) {
+    //     that.setData({
+    //       classifyViewed: that.data.categories[i].id,
+    //       scrolltop: 0,
+    //       goodsListCurrent: that.data.goodsList[i],
           
-        })
-      }
-    }
+    //     })
+    //   }
+    // }
 
     //获取系统信息  
     wx.getSystemInfo({
@@ -274,7 +274,7 @@ Page(Object.assign({},{
               }
             }
 
-            console.log('getGoodsList----------------------')
+            console.log('左侧导航列表')
             console.log(that.data.goodsList)
             that.setData({
               loadingStatus: false,
@@ -297,9 +297,9 @@ Page(Object.assign({},{
       }
     })
   },
+  // 获取公告内容
   getPrompt: function () {
     var that = this
-    //  获取关于我们Title
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
       data: {

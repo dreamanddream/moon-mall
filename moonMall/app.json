@@ -14,9 +14,8 @@
     "pages/ucenter/location/location",
     "pages/ucenter/feedback/feedback",
     "pages/ucenter/order-list/index",
+    "pages/ucenter/mycoupons/index",
     "pages/footprint/footprint",
-    "pages/mycoupons/index",
-    
     "pages/authorize/index"
   ],
   "window":{

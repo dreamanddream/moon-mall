@@ -119,12 +119,9 @@ Page({
         //当前的经度和纬度
         let latitude = res.latitude
         let longitude = res.longitude
-        console.log("latitude" + latitude)
-        console.log("longitude" + longitude)
         wx.request({
           url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${app.globalData.tencentMapKey}`,
           success: res => {
-            console.log(res.data)
             that.setData({
               city: res.data.result.ad_info.city,
               currentCityCode: res.data.result.ad_info.adcode,
@@ -144,7 +141,6 @@ Page({
         key: 'mallName'
       },
       success: function (res) {
-        console.log("请求banners返回代码", res.data);
         if (res.data.code === 0) {
           that.setData({
             banners: res.data.data

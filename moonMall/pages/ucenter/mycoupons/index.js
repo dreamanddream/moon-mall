@@ -13,7 +13,8 @@ Page({
   getMyCoupons: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/my',
+      // url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/my',
+      url:'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/discounts/my',
       data: {
         token: wx.getStorageSync('token'),
         status: 0

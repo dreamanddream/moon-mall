@@ -74,24 +74,27 @@ Page({
       return;
     }
     wx.setStorageSync('userInfo', e.detail.userInfo)
-    console.log("获取用户个人信息", e.detail.userInfo)
     this.login();
   },
   login: function () {
     let that = this;
     
     let token = wx.getStorageSync('token');
+    // console.log("token",token);
     if (token) {
       wx.request({
-        url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/check-token',
+        // url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/check-token',
+        url:'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/user/check-token',
         data: {
           token: token
         },
         success: function (res) {
           if (res.data.code != 0) {
+            console.log("00000")
             wx.removeStorageSync('token')
             that.login();
           } else {
+            console.log("自定义login中请求的数据", res.data);
             // 回到原来的地方放
             wx.navigateBack();
           }
@@ -102,6 +105,7 @@ Page({
     // 小程序登录界面，通过code查看token
     wx.login({
       success: function (res) {
+        console.log("获取res.code");
         wx.request({
           // url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/login',
           url:'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/user/wxapp/login',
@@ -110,7 +114,7 @@ Page({
           },
           success: function (res) {
             console.log("查看请求登录接口返回的数据",res.data);
-            if (res.data.code == 1000) {
+            if (res.data.code == 10000) {
               // 去注册
               that.registerUser();
               return;
@@ -125,6 +129,7 @@ Page({
               })
               return;
             }
+            // 
             wx.setStorageSync('token', res.data.data.token)
             wx.setStorageSync('uid', res.data.data.uid)
             // 回到原来的页面
@@ -134,6 +139,7 @@ Page({
       }
     })
   },
+  // 登录之前首先调用注册api，不过没有直接的注册按钮，而是点击同意授权登录时才有
   registerUser: function () {
     var that = this;
     wx.login({
@@ -145,7 +151,8 @@ Page({
             var encryptedData = res.encryptedData;
             // 下面开始调用注册接口
             wx.request({
-              url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/register/complex',
+              // url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/register/complex',
+              url:'https://api.it120.cc/c1e7b00ba9fec22ab7a9371337325243/user/wxapp/register/complex',
               data: { code: code, encryptedData: encryptedData, iv: iv }, // 设置请求的 参数
               success: (res) => {
                 wx.hideLoading();
